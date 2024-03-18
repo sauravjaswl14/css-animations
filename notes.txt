@@ -1,0 +1,279 @@
+transform
+-----------------
+Transforms your web elements.
+
+We can use transform to either stretch an element or change the coordinates of the element, skew an element or rotate it. we can do all this without having to alter the normal document flow.
+
+img{
+  transform: translateX(200px);
+}
+
+
+translate()
+-----------------
+
+-> translate just means to move the elements from one place to another on the web page.
+
+-> so if you want to move the element across X-Axis, you can use translateX()
+
+-> so if you want to move the element across Y-Axis, you can use translateY()
+
+
+translateX(200px) -> moves element 200px to the right
+
+reason it has move the element to the right is because the number is positive integer
+
+negative integer moves the element to the left
+
++ve to the right, -ve to the left.
+
+translateY(200px) -> moves element 200px down 
+translateY(-200px) -> moves element 200px up
+
+translate() -> can take two values
+translate(50px) -> if we pass one value, it's gonna translate it along the x-axis
+
+translate(-200px,200px) -> we can control x and y at once -> -200px left , 200px down
+
+
+scale()
+-----------
+
+we use scale() to either stretch or shrink an element 
+scale() -> Scales the element, makes it bigger or smaller
+
+scaleX() -> stretches or shrinks element across x axis 
+
+scaleX(1) -> Does nothing : this is saying we want (1:1) 1 to 1 scale
+
+scaleX() -> any number more than 1 stretches element along x axis
+scaleX() -> any number less than 1 down to 0 shrinks element along x axis
+
+scaleX(3) -> makes element 3 times big
+scaleX(0.5) -> makes element half as small
+
+scaleY(0.5) -> shrinks along y-axis 
+scaleY(3) -> stretches element along y-axis 
+
+scale(3) -> stretches element along x and y axis 
+
+scale(3, 0.5) -> stretches 3 times along x axis and shrinks half as size along y-axis
+
+
+rotate()
+--------------
+
+transform: rotateZ(-90deg) translateY(200px) scale(2);
+
+
+every value is dependent on the previous value 
+
+
+Transition
+-----------------
+The most simple way to do some kind of animation on a page but they are not technically part of the whole CSS Animation
+
+
+What they do is basically they Transition an element from one state to another state in a certain way over a set amount of time
+
+Transitions are all about going from one state to another and how the element transitions between the two. 
+
+
+.circle{
+  width: 100px;
+  padding: 50px 0;
+  line-height: 0;
+  margin: 60px auto;
+  background: pink;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 1s, transform 0.3s;
+}
+
+.circle:hover{
+  background: salmon;
+  transform: rotate(360deg);
+}
+
+We've got two different transitions controlling two different things
+
+We can pass through other parameters if you like where we can pass through a delay for eg: we want 1s delay
+
+transition: background 1s, transform 0.3s  1s;
+                                        ^    ^
+                                        |    |
+                          transition time    delay
+
+always the first one when you supply is the transition time and the second number you supply is the delay
+
+There are three parameters we can pass through the transition property eg:Timing function
+
+transition: background 1s, transform 0.3a 1s linear;
+
+linear means it never speeds up and it never slows down
+
+ease-in: start off slow and gradually speed up
+
+
+keyframes
+--------------
+
+keyframes are basically the power house of css animation, they are going to be where we define our animations and tell css how we want the animation to work.
+which property we're going to change and when and how exactly we're going to do it.
+
+.mario{
+  position: absolute;
+  top: -40px;
+  left: 0px;
+  animation-name: drive;
+  animation-duration: 3s;
+}
+
+@keyframes drive{
+  from{transform: translateX(0)}
+  to{transform: translateX(500px)}
+}
+
+
+animation-fill-mode
+-----------------------------
+Tells CSS what to do with the element we are animating, outside of the animation window, so before you start to animating it and after.
+
+Takes four values
+--------------------
+-none : do nothing outside of animation window, once animation is finished return the element to its initial  position(original state)
+
+-forwards: takes the last property i.e. in to{} state
+-backwards: whatever the starting animation state is, apply that to element before the animation kicks in.
+-both: apply backwards and forwards both to animation
+
+.mario{
+  position: absolute;
+  top: -40px;
+  left: 0px;
+  animation-name: drive;
+  animation-duration: 3s;
+  animation-fill-mode: forwards | backwards | both;
+}
+
+@keyfranes drive{
+  from{ transform: translateX(200px)}
+  to{ transform: stranslateX(700px)}
+}
+
+repeating animation
+----------------------------
+
+animation-iteration-count to control how many times we want this animation to repeat.
+
+.mario{
+  position: absolute;
+  top: -40px;
+  left: 0px;
+  animation-name: drive;
+  animation-duration: 3s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+@keyframes drive{
+  from{transform: translateX(-200px)}
+  to{transform: translateX(1000px)}
+}
+
+
+Animation Direction
+--------------------------
+
+.luigi{
+  position: absolute;
+  top: 100px;
+  left: 0;
+  animation-name: drive;
+  animation-duration: 5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animatiion-direction: normal| reverse| alternate| alternate-reverse;
+}
+
+Animation Timing Functions
+--------------------------------
+
+kind of determines the rate at which the element being animated kind of goes like from point A to B
+
+linear: doesn't speeds up and doesn't slows down 
+ease-in: starts slow and then speeds up and doesn't slows down at the end
+ease-out: starts at the normal speed and then it slows down just towards the end.
+
+.mario{
+  position: absolute;
+  top: -40px;
+  left: 0px;
+  animation-name: drive;
+  animation-duration: 3s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.luigi{
+  position: absolute;
+  top: 100px;
+  left: 0;
+  animation-name: drive;
+  animation-duration: 5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes drive{
+  from{ transform: translateX(-200px)}
+  to{ transform: translateX(1000px)}
+}
+
+Animation duration
+--------------------
+
+animation: animation-name animation-duration animation-timing-function animation-iteration-count animation-direction
+
+-> the first number you put in shorthand is always duration
+
+.cloud{
+  position: absolute;
+}
+
+.cloud:nth-child(1){
+  width: 200px;
+  top: 120px;
+  opacity: 0.5;
+  animation: wind 80s linear infinite reverse;
+}
+
+.cloud:nth-child(2){
+  width: 300px;
+  top: 0;
+  animation: wind 50s linear infinite reverse;
+}
+
+@keyframes wind{
+  from{left: -300px}
+  to{left: 100%}
+}
+
+Chaining Animations 
+-------------------------
+
+.mario{
+  position: absolute;
+  top: -40px;
+  left: 0px;
+  animation: drive 3s both infinite linear, jump 0.3s 1.2s ease;
+}
+
+@keyframes jump{
+  0%{ top: -40px}
+  50%{ top: -100px}
+  100%{ top: -40px}
+}
